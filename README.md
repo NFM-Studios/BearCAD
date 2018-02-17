@@ -1,5 +1,8 @@
 BearCAD
 
+Stay up to date by following our trello!
+https://trello.com/b/LMnk32ca/bearcad
+
 
 To Install the Packages Needed....
 
