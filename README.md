@@ -4,7 +4,7 @@ Stay up to date by following our trello!
 https://trello.com/b/LMnk32ca/bearcad
 
 
-To Install the Packages Needed....
+To Install the Packages Needed.... (If you run this on windows through CMD, please ENSURE YOU START IT AS ADMIN)
 
 ```
 pip install -r requirements.txt
