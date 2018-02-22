@@ -127,14 +127,14 @@ class CreateUserFormView(View):
 
         if form.is_valid():
             ''' reCAPTCHA validation '''
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            data = {
-                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
+            #recaptcha_response = request.POST.get('g-recaptcha-response')
+            #data = {
+            #    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+            #    'response': recaptcha_response
+            #}
 
-            r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-            result = r.json()
+            #r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+            #result = r.json()
             ''' End reCAPTCHA validation'''
             if result['success']:
                 user = form.save(commit=False)
@@ -147,7 +147,7 @@ class CreateUserFormView(View):
 
                 current_site = get_current_site(request)
 
-                mail_subject = 'Activate your "Project Olly" account.'
+                mail_subject = 'Activate your BearCAD account.'
                 message = render_to_string('profiles/activate_email.html', {
                     'user': user,
                     'domain': current_site.domain,
