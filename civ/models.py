@@ -80,13 +80,16 @@ class VehicleMake(models.Model):
         ('western motorcyle company', 'Western Motorcyle Company'),
         ('willard', 'Willard'),
         ('zirconium', 'Zirconium'),
+        ('none', 'None')
     )
+    make = models.CharField(max_length=40, choices=MAKE_CHOICES, default=None)
 
 class VehicleModel(models.Model):
     #MODEL_CHOICES = (
     #
     #)
     make = models.ForeignKey(VehicleMake, related_name='vehiclemake', on_delete=models.CASCADE)
+    model = models.CharField(max_length=40, choices=MODEL_CHOICES)
 
 class Vehicle(models.Model):
     owner =  models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
