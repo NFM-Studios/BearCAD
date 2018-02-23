@@ -85,9 +85,19 @@ class VehicleMake(models.Model):
     make = models.CharField(max_length=40, choices=MAKE_CHOICES, default=None)
 
 class VehicleModel(models.Model):
-    #MODEL_CHOICES = (
-    #
-    #)
+    MODEL_CHOICES = (
+        #albany
+        ('alpha', 'Alpha'),
+        ('buccaneer', 'Buccaneer'),
+        ('buccaneer custom', 'Buccaneer Custom'),
+        ('cavalcade', 'Cavalcade'),
+        ('cavalcade fxt', 'Cavalcade FXT')
+        ('emperor', 'Emperor'),
+        ('esperanto', 'Esperatno'),
+        ('fanken stange', 'Fanken Stange'),
+        
+
+    )
     make = models.ForeignKey(VehicleMake, related_name='vehiclemake', on_delete=models.CASCADE)
     model = models.CharField(max_length=40, choices=MODEL_CHOICES)
 
