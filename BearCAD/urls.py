@@ -18,7 +18,7 @@ urlpatterns = [
     path('404/', pages_views.notfound),
 
     url(r'^login/', profile_views.login, {'template_name': 'profiles/login_form.html'}, name='login'),
-    #url(r'^logout/', logout, {'template_name': 'index.html', 'next_page': '/'}, name='logout'),
+    url(r'^logout/', profile_views.logout, name='logout'),
     #url(r'^reset-password/$', password_reset, {'template_name': 'profiles/reset_form.html', 'email_template_name': 'profiles/reset_email.html'}, name='reset_password'),
     ##url(r'^reset-password/done/$', password_reset_done, {'template_name': 'profiles/reset_done.html'}, name='password_reset_done'),
     #url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {'template_name': 'profiles/reset_confirm.html'}, name='password_reset_confirm'),
