@@ -1,7 +1,8 @@
-pillow>=4.2.1
+django>=2.2.4, <=2.2.7
 
-django-taggit>=0.22.2
+channels==2.3.1
 
 django-ipware>=1.1.6
 
 requests>=2.18.4
+

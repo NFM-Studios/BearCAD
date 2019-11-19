@@ -13,7 +13,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode, is_safe_url
 from django.template.loader import render_to_string
-from .tokens import account_activation_token
+# from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied
@@ -26,13 +26,15 @@ from django.template.response import TemplateResponse
 
 from ipware.ip import get_real_ip
 
-#def get_ip(request):
-   # ip = get_real_ip(request)
-    #if ip is not None:
-     #   if user is not None:
-      #      user = User.objects.get(username=request.user.username)
-       #     user.ip = ip  # change field
-        #    user.save() # this will update only
+
+# def get_ip(request):
+# ip = get_real_ip(request)
+# if ip is not None:
+#   if user is not None:
+#      user = User.objects.get(username=request.user.username)
+#     user.ip = ip  # change field
+#    user.save() # this will update only
+
 
 def login(request, template_name='profiles/login_form.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
@@ -95,11 +97,13 @@ def profile(request, urlusername):
     userprofile = UserProfile.objects.get(user__username=urlusername)
     return render(request, template_name, {'userprofile': userprofile, 'requestuser': request.user})
 
+
 def profile_no_username(request):
     if not (request.user.is_anonymous):
         return redirect('/profile/user/' + str(request.user))
     else:
         return redirect('/login')
+
 
 def edit_profile(request):
     if request.method == 'POST':
@@ -114,6 +118,7 @@ def edit_profile(request):
 
         return render(request, 'profiles/edit_profile.html', {'form': form})
 
+
 class CreateUserFormView(View):
     form_class = CreateUserForm
     template_name = 'profiles/registration_form.html'
@@ -127,14 +132,14 @@ class CreateUserFormView(View):
 
         if form.is_valid():
             ''' reCAPTCHA validation '''
-            #recaptcha_response = request.POST.get('g-recaptcha-response')
-            #data = {
+            # recaptcha_response = request.POST.get('g-recaptcha-response')
+            # data = {
             #    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
             #    'response': recaptcha_response
-            #}
+            # }
 
-            #r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-            #result = r.json()
+            # r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+            # result = r.json()
             ''' End reCAPTCHA validation'''
             if result['success']:
                 user = form.save(commit=False)
@@ -156,8 +161,8 @@ class CreateUserFormView(View):
                 })
                 to_email = form.cleaned_data.get('email')
                 email = EmailMessage(
-                        mail_subject, message, to=[to_email]
-                    )
+                    mail_subject, message, to=[to_email]
+                )
                 email.send()
 
                 messages.success(request, "Please confirm your email")
@@ -166,6 +171,7 @@ class CreateUserFormView(View):
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
 
         return render(request, self.template_name, {'form': form})
+
 
 def activate(request, uidb64, token):
     try:

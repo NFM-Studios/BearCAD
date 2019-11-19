@@ -19,6 +19,7 @@ build/
 tests/report/
 .vscode
 .idea
+env/
 
 # Byte-compiled / optimized / DLL files
 *.pyc
