@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.conf.urls import url, include
 from django.urls import path
-#from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 from django.conf import settings
 from django.conf.urls.static import settings
 from profiles import views as profile_views
@@ -18,7 +17,7 @@ urlpatterns = [
     path('privacy/', pages_views.privacy, name='privacy'),
     path('404/', pages_views.notfound),
 
-    #url(r'^login/', login, {'template_name': 'profiles/login_form.html'}, name='login'),
+    url(r'^login/', profile_views.login, {'template_name': 'profiles/login_form.html'}, name='login'),
     #url(r'^logout/', logout, {'template_name': 'index.html', 'next_page': '/'}, name='logout'),
     #url(r'^reset-password/$', password_reset, {'template_name': 'profiles/reset_form.html', 'email_template_name': 'profiles/reset_email.html'}, name='reset_password'),
     ##url(r'^reset-password/done/$', password_reset_done, {'template_name': 'profiles/reset_done.html'}, name='password_reset_done'),
