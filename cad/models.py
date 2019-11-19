@@ -19,7 +19,6 @@ class MapCountyOption(models.Model):
     name = models.CharField(default="CountyOption", max_length=255)
 
 
-
 class MapStreetOption(models.Model):
     name = models.CharField(default="StreetOption", max_length=255)
     county = models.ForeignKey(MapCountyOption, related_name='street_county', on_delete=models.SET_NULL)
@@ -50,6 +49,11 @@ class CallReport(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
 
+class IncidentType(models.Model):
+    # number = models.PositiveIntegerField(default=0)
+    description = models.CharField(max_length=255, default="Robbery")
+
+
 class Call(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -60,7 +64,8 @@ class Call(models.Model):
     street1 = models.ForeignKey(MapStreetOption, related_name='MAP_STREET_1', on_delete=models.SET_NULL)
     street2 = models.ForeignKey(MapStreetOption, related_name='MAP_STREET_2', on_delete=models.SET_NULL)
     street_other = models.CharField(blank=True, Null=True, max_length=255)
-    units =
+    units = models.ManyToManyField(DepartmentUnit)
+    incident_type = models.ForeignKey(IncidentType, related_name='CALL_INCIDENT', on_delete=models.SET_NULL)
 
 
 class CitationType(models.Model):
