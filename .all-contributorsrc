@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "mikemaddem",
+      "name": "Mike M.",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19417674?v=4",
+      "profile": "http://mikemadden.me",
+      "contributions": [
+        "code",
+        "ideas",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "BearCAD",
+  "projectOwner": "mikemaddem",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
