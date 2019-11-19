@@ -64,7 +64,7 @@ def login(request, template_name='profiles/login_form.html',
             if not request.POST.get('remember me', None):
                 request.session.set_expiry(0)
             # Ensure the user-originating redirection url is safe.
-            if not is_safe_url(url=redirect_to, host=request.get_host()):
+            if not is_safe_url(url=redirect_to, allowed_hosts=settings.ALLOWED_HOSTS):
                 redirect_to = resolve_url(settings.LOGIN_REDIRECT_URL)
 
             # Okay, security check complete. Log the user in.
