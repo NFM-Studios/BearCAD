@@ -1,8 +1,8 @@
-django>=2.2.4, <=2.2.7
+django==2.2.7
 
 channels==2.3.1
 
-django-ipware>=1.1.6
+django-ipware==2.1.0
 
-requests>=2.18.4
+requests==2.22.0
 
