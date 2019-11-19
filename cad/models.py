@@ -1,5 +1,5 @@
 from django.db import models
-from profiles.models import PersonProfile
+from profiles.models import PersonProfile, UserProfile
 
 
 class UserVehicleMakeChoice(models.Model):
@@ -11,8 +11,10 @@ class UserVehicleModelChoice(models.Model):
 
 
 class UserVehicle(models.Model):
-    make = models.CharField(choices=UserVehicleMakeChoice, max_length=255)
-    model = models.CharField(choices=UserVehicleModelChoice, max_length=255)
+    make = models.ForeignKey(UserVehicleMakeChoice, related_name='uservehicle_make', on_delete=models.SET_NULL,
+                             null=True)
+    model = models.ForeignKey(UserVehicleModelChoice, related_name='uservehicle_model', on_delete=models.SET_NULL,
+                              null=True)
 
 
 class MapCountyOption(models.Model):
@@ -21,7 +23,7 @@ class MapCountyOption(models.Model):
 
 class MapStreetOption(models.Model):
     name = models.CharField(default="StreetOption", max_length=255)
-    county = models.ForeignKey(MapCountyOption, related_name='street_county', on_delete=models.SET_NULL)
+    county = models.ForeignKey(MapCountyOption, related_name='street_county', on_delete=models.SET_NULL, null=True)
     postal = models.CharField(null=True, blank=True, max_length=10)
 
 
@@ -58,14 +60,14 @@ class Call(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     # TODO - verify on_delete set null
-    creator = models.ForeignKey(PersonProfile, related_name='call_creator', on_delete=models.SET_NULL)
+    creator = models.ForeignKey(PersonProfile, related_name='call_creator', on_delete=models.SET_NULL, null=True)
     departments = models.ManyToManyField(Department)
     reports = models.ManyToManyField(CallReport)
-    street1 = models.ForeignKey(MapStreetOption, related_name='MAP_STREET_1', on_delete=models.SET_NULL)
-    street2 = models.ForeignKey(MapStreetOption, related_name='MAP_STREET_2', on_delete=models.SET_NULL)
-    street_other = models.CharField(blank=True, Null=True, max_length=255)
+    street1 = models.ForeignKey(MapStreetOption, related_name='MAP_STREET_1', on_delete=models.SET_NULL, null=True)
+    street2 = models.ForeignKey(MapStreetOption, related_name='MAP_STREET_2', on_delete=models.SET_NULL, null=True)
+    street_other = models.CharField(blank=True, null=True, max_length=255)
     units = models.ManyToManyField(DepartmentUnit)
-    incident_type = models.ForeignKey(IncidentType, related_name='CALL_INCIDENT', on_delete=models.SET_NULL)
+    incident_type = models.ForeignKey(IncidentType, related_name='CALL_INCIDENT', on_delete=models.SET_NULL, null=True)
 
 
 class CitationType(models.Model):
@@ -76,9 +78,11 @@ class CitationType(models.Model):
 
 
 class Citation(models.Model):
-    person = models.ForeignKey(PersonProfile, related_name='citation_person', on_delete=models.SET_NULL)
-    creator = models.ForeignKey(PersonProfile, related_name='citation_creator', on_delete=models.SET_NULL)
-    department_issuing = models.ForeignKey(Department, related_name='issuing_department', on_delete=models.SET_NULL)
+    person = models.ForeignKey(PersonProfile, related_name='citation_person', on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey(PersonProfile, related_name='citation_creator', on_delete=models.SET_NULL, null=True)
+    department_issuing = models.ForeignKey(Department, related_name='citation_issuing_department',
+                                           on_delete=models.SET_NULL,
+                                           null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField(default="no warning description description")
@@ -93,9 +97,11 @@ class WarningType(models.Model):
 
 
 class Warning(models.Model):
-    person = models.ForeignKey(PersonProfile, related_name='warning_person', on_delete=models.SET_NULL)
-    creator = models.ForeignKey(PersonProfile, related_name='warning_creator', on_delete=models.SET_NULL)
-    department_issuing = models.ForeignKey(Department, related_name='issuing_department', on_delete=models.SET_NULL)
+    person = models.ForeignKey(PersonProfile, related_name='warning_person', on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey(PersonProfile, related_name='warning_creator', on_delete=models.SET_NULL, null=True)
+    department_issuing = models.ForeignKey(Department, related_name='wawrning_issuing_department',
+                                           on_delete=models.SET_NULL,
+                                           null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField(default="no warning description description")
@@ -110,9 +116,11 @@ class WarrantType(models.Model):
 
 
 class Warrant(models.Model):
-    person = models.ForeignKey(PersonProfile, related_name='wanted_person', on_delete=models.SET_NULL)
-    creator = models.ForeignKey(PersonProfile, related_name='warrant_creator', on_delete=models.SET_NULL)
-    department_issuing = models.ForeignKey(Department, related_name='issuing_department', on_delete=models.SET_NULL)
+    person = models.ForeignKey(PersonProfile, related_name='wanted_person', on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey(PersonProfile, related_name='warrant_creator', on_delete=models.SET_NULL, null=True)
+    department_issuing = models.ForeignKey(Department, related_name='warrant_issuing_department',
+                                           on_delete=models.SET_NULL,
+                                           null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField(default="no warrant description")

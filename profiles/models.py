@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cad.models import Department, UserVehicle
+#from cad.models import Department, UserVehicle
 
 
 class PersonProfile(models.Model):
     first = models.CharField(default="First", max_length=20)
     last = models.CharField(default="Last", max_length=20)
-    departments = models.ManyToManyField(Department)
+    #departments = models.ManyToManyField(Department)
     # warrants = mtm
-    vehicles = models.ManyToManyField(UserVehicle)
+    #vehicles = models.ManyToManyField(UserVehicle)
     # addresses
     # permits
 
