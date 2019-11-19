@@ -26,9 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profiles',
-    'civ',
-
-    'taggit',
+    'channels',
     'ipware',
 ]
 
@@ -111,3 +109,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+BEARCAD_VERSION = "0.0.2"
