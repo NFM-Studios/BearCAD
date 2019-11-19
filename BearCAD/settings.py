@@ -16,6 +16,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+ASGI_APPLICATION = 'BearCAD.routing.application'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -28,6 +30,7 @@ INSTALLED_APPS = [
     'profiles',
     'channels',
     'ipware',
+    'pages'
 ]
 
 MIDDLEWARE = [
