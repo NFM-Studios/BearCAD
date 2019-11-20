@@ -6,10 +6,12 @@ from django.conf.urls.static import settings
 from profiles import views as profile_views
 from django.conf.urls.static import static
 from pages import views as pages_views
+from staff import views as staff_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^register/', profile_views.CreateUserFormView.as_view(), name='register'),
+
 
     path('', pages_views.index, name='index'),
     path('about/', pages_views.about, name='about'),
@@ -26,5 +28,6 @@ urlpatterns = [
     url(r'^profile/', include('profiles.urls', namespace='profiles')),
     url(r"^activate/(?P<uidb64>[0-9A-Za-z_'\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$", profile_views.activate, name='activate'),
 
+    path('staff/', include('staff.urls', namespace='staff')),
 
 ]
