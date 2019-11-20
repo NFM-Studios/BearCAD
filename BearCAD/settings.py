@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'profiles',
     'channels',
     'ipware',
-    'pages'
+    'pages',
+    'cad',
 ]
 
 MIDDLEWARE = [
