@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'ipware',
     'pages',
     'cad',
+    'staff',
 ]
 
 MIDDLEWARE = [
