@@ -1,4 +1,4 @@
-django==2.2.7
+django==3.0
 
 channels==2.3.1
 
