@@ -1,6 +1,6 @@
 django==2.2.9
 
-channels==2.4.0
+channels==3.0.3
 
 django-ipware==2.1.0
 
